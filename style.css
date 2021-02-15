@@ -1,0 +1,55 @@
+/*
+ Theme Name:     Divi Child - PSPAC
+ Theme URI:      https://www.pacroom.com
+ Description:    Divi Child Theme - PSPAC
+ Author:         Tammy Craik
+ Author URI:     https://www.javahat.com
+ Template:       Divi
+ Version:        1.0.0
+*/
+ 
+ 
+/* =Theme customization starts here
+------------------------------------------------------- */
+
+
+body,
+#main-content 
+ {
+ background-color: rgba(0, 0, 0, 0);
+ }
+
+
+.widget-title
+ {
+ padding-top: 10px;
+ }
+
+p.note /*note above Upcoming Events title on home page divi template*/
+ {
+ text-align: center;
+ padding: 0;
+ margin: 0 0 5px;
+  font-size: 6pt;
+}
+
+/* Width of side columns of special layout on home page divi template */
+.et_pb_gutters1 .et_pb_column_1_4, .et_pb_gutters1.et_pb_row .et_pb_column_1_4
+{
+	width: 20%;
+}
+
+/* Width of middle column of special layout on home page divi template */
+.et_pb_gutters1 .et_pb_column_1_2, .et_pb_gutters1.et_pb_row .et_pb_column_1_2 {
+	width: 60%;}
+	
+/* Gutter between columns in rows of menu sections on home page divi template */
+.et_pb_column_1_2 > .et_pb_row_inner.et_pb_gutters1 > .et_pb_column_1_6, .et_pb_gutters1 .et_pb_column_1_2 > .et_pb_row_inner > .et_pb_column_1_6
+	{ margin-left: 1%;}
+
+/* Reduce width of columns in rows of menu section so it fits on the screen on home page divi template. */
+@media screen and (max-width:980px){
+.et_pb_gutters1 .et_pb_row_1-6_1-6_1-6 > .et_pb_column.et_pb_column_1_6, .et_pb_gutters1.et_pb_row_1-2_1-6_1-6_1-6 > .et_pb_column.et_pb_column_1_6 {
+	width: 32.333%;
+}
+}
