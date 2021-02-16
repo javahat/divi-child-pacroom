@@ -2,9 +2,8 @@
 /**
  * Display meeting documents
  *
- * @package PAC Room
- * @subpackage pspac child theme
- * @since PSPAC 1.0
+ * @package Divi Child - PACroom
+ * @since Divi Child - PACroom 1.0
  */
  $page_url = get_permalink();
 echo 'This is a custom snippet<br>';
@@ -110,10 +109,10 @@ if ( current_user_can('read_private_posts') )
 								
 								<td class="doc-link" aria-label="Printable Documents ">
 									<?php 
-									if ( $add_pdf ) { echo ' <a href="' . $add_pdf . '"><img src="' . $page_url . '/wp-content/themes/divi-child-pspac/images/icon-pdf-en.png" width="25" height="25" alt="icon for English PDF - ' . $title . '"></a> '; }
-									if ( $add_translation ) { echo ' <a href="' . $add_translation . '"><img src="' . $url . '/wp-content/themes/divi-child-pspaca/images/icon-pdf-ch.png" width="25" height="25" alt="icon for chinese translation PDF - ' . $title . '"></a> '; }
-									if ( $add_doc ) { echo '<a href="' . $add_doc . '"><img src="' . $url . '/wp-content/themes/divi-child-pspac/images/icon-doc.png" width="25" height="25" alt="icon for DOC - ' . $title . '"></a> '; }
-									if ( $add_xls ) { echo '<a href="' . $add_xls . '"><img src="' . $url . '/wp-content/themes/divi-child-pspac/images/icon-xls.png" width="25" height="25" alt="icon for XLS - ' . $title . '"></a>'; } ?>
+									if ( $add_pdf ) { echo ' <a href="' . $add_pdf . '"><img src="' . $page_url . '/wp-content/themes/divi-child-pacroom/images/icon-pdf-en.png" width="25" height="25" alt="icon for English PDF - ' . $title . '"></a> '; }
+									if ( $add_translation ) { echo ' <a href="' . $add_translation . '"><img src="' . $url . '/wp-content/themes/divi-child-pacrooma/images/icon-pdf-ch.png" width="25" height="25" alt="icon for chinese translation PDF - ' . $title . '"></a> '; }
+									if ( $add_doc ) { echo '<a href="' . $add_doc . '"><img src="' . $url . '/wp-content/themes/divi-child-pacroom/images/icon-doc.png" width="25" height="25" alt="icon for DOC - ' . $title . '"></a> '; }
+									if ( $add_xls ) { echo '<a href="' . $add_xls . '"><img src="' . $url . '/wp-content/themes/divi-child-pacroom/images/icon-xls.png" width="25" height="25" alt="icon for XLS - ' . $title . '"></a>'; } ?>
 								</td>
 							</tr>	
 			<?php 

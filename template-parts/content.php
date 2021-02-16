@@ -8,9 +8,8 @@
  * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package JavaHat
- * @subpackage Simply_Strata
- * @since Simply Strata 1.0
+ * @package Divi Child - PACroom
+ * @since Divi Child - PACroom 1.0
  */
  
  global $post;

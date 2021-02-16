@@ -1,7 +1,7 @@
 /*
- Theme Name:     Divi Child - PSPAC
+ Theme Name:     Divi Child - PACroom
  Theme URI:      https://www.pacroom.com
- Description:    Divi Child Theme - PSPAC
+ Description:    Divi Child Theme - PACroom
  Author:         Tammy Craik
  Author URI:     https://www.javahat.com
  Template:       Divi
@@ -31,6 +31,49 @@ p.note /*note above Upcoming Events title on home page divi template*/
  padding: 0;
  margin: 0 0 5px;
   font-size: 6pt;
+}
+
+.full { width: 100%; }
+
+.important { color: red;}
+
+#selectyr
+{
+text-align: right;
+min-width: 195px;
+}
+
+td.dropdowndd select
+{
+width: 100px;
+}
+
+.embed-container {
+
+ position: relative;
+
+ padding-bottom: 56.25%; /* set the aspect ratio here as (height / width) * 100% */
+
+ height: 0;
+
+ overflow: hidden;
+
+ max-width: 100%;
+
+}
+
+.embed-container embed {
+
+ position: absolute;
+
+ top: 0;
+
+ left: 0;
+
+ width: 100%;
+
+ height: 100%;
+
 }
 
 /* Width of side columns of special layout on home page divi template */
