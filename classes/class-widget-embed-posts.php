@@ -1,4 +1,17 @@
 <?php
+/* *****************************
+// Description of widget:
+// 1. A dynamic select field populated with school years from posts in category.
+// 2. A dynamic select field populated with documents from the selected year.
+// 3. The most recent pdf in teh selected category is embedded unless a document is selected.
+// The code is adapted from:
+// https://stackoverflow.com/questions/31066314/reload-page-on-change-of-dropdown-and-pass-that-value
+
+// *****************************
+// Fields gathered in Widget:
+// $school_start // Numeric month that school begins. Default is 09 for September
+// $cat_name     // Name of Category selected
+// *****************************/ 
 
 // Create widget class by extending the standard WP_Widget class and some of its functions.
 class pdfembed_widget extends WP_Widget 
@@ -38,6 +51,7 @@ class pdfembed_widget extends WP_Widget
         
         require_once( get_stylesheet_directory(). '/includes/widget-select-document-by-school-year.php' );
 
+        // If a document is not selected use the most recent category post
         if (!isset($cur_doc)) 
             {
             //Query posts for latest post with category 'Meeting Document' 
@@ -60,6 +74,7 @@ class pdfembed_widget extends WP_Widget
                     }
                 }
             }
+        // If a document is selected update the title and document
         if (isset($_GET["id"]))
             {
             $pid = $_GET["id"];
@@ -67,6 +82,7 @@ class pdfembed_widget extends WP_Widget
             $cur_doc = get_field('document_pdf', $pid); 
             }
 
+        // Display the Document title
         echo '<br><strong>Document Title:</strong> ' . $cur_title;
         // Display embedded pdf document on page
         echo '<embed src="' . $cur_doc . '" type="application/pdf" width="100%" height="auto"></embed>';
