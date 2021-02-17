@@ -33,7 +33,7 @@ p.note /*note above Upcoming Events title*/
  font-size: 6pt;
 }
 
-.full { width: 100%; padding: 5px; margin: 0;
+table.full { width: 100%; padding: 5px; margin: 0 0 5px 0;
 }
 
 .important { color: red;}
@@ -41,7 +41,7 @@ p.note /*note above Upcoming Events title*/
 #selectyr, #myselect
 {
 text-align: right;
-min-width: 150px;
+min-width: 200px;
 }
 
 td.dropdowndd select

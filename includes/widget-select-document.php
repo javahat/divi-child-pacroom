@@ -10,23 +10,6 @@
 // *****************************
 
 $permalink = get_permalink();
-//$school_start = get_query_var('year_start');
-//$cat_name = get_query_var('category');
-
-if (!isset($school_start)) 
-    { 
-    $school_start = '09';
-    echo '<span class="important"><i>School Start is not carrying over from widget.</i></span>';
-    }
-
-if (!isset($cat_name)) 
-    { 
-    $cat_name = 'Meeting Document';
-    echo '<br><span class="important"><i>Category is not carrying over from widget.</i></span>';
-    }
-
-echo '<br>School Start:' . $school_start;
-echo '<br>Category: ' . $cat_name;
    
 if (!isset($get_meeting_year) || $get_meeting_year == 'all')
     {
@@ -45,52 +28,38 @@ if (!isset($get_meeting_year) || $get_meeting_year == 'all')
 elseif (isset($get_meeting_year)) 
     { 
     // Get the school year based on date selected
-        //$meeting_get = $_GET["syr"]; // Get the meeting date selected
-        $meeting_get_year = date($_GET["syr"]); // Get the meeting year
-        $meeting_year = date('Y', $meeting_get_year); // Filter the school year
-        $test_start = $meeting_get_year . '-09-01'; // Set the beginning of school year date
-        $test_end = $meeting_get_year+1; // Get the ending year
-        $test_end = $test_end . '-08-31'; // Set the end of the school year date
-        
-        $test_start_date = strtotime($test_start);
-        $test_start_date = date('Y-m-d', $test_start_date);
-        
-        $test_end_date = strtotime($test_end);
-        $test_end_date = date('Y-m-d', $test_end_date);
+    $meeting_get_year = date($_GET["syr"]); // Get the meeting year
+    $meeting_year = date('Y', $meeting_get_year); // Filter the school year
+    $test_start = $meeting_get_year . '-09-01'; // Set the beginning of school year date
+    $test_end = $meeting_get_year+1; // Get the ending year
+    $test_end = $test_end . '-08-31'; // Set the end of the school year date
 
-        // Only documents with specified category name and school year
-        $selectDoc = get_posts(array(
-            'posts_per_page' => -1, // get all posts
-            'post_type' => 'post',
-            'post_status' => 'publish',
-            'category_name' => $cat_name,
-                'meta_query' => array(
-                    array(
-                        'key'           => 'meeting_date',
-                        'compare'       => 'BETWEEN',
-                        'value'         => array( $test_start_date, $test_end_date),
-                        'type'          => 'DATE',
-                    )),
-            
-            'order' => 'ASC',
-            'orderby' => 'meta_value',
-            'meta_key'       => 'meeting_date',         
-            'meta_type'      => 'DATETIME',
-            
+    $test_start_date = strtotime($test_start);
+    $test_start_date = date('Y-m-d', $test_start_date);
 
-/*            'date_query' => array(
-                array(
-                    'after'     => $test_start_date,
-                    'before'    => $test_end_date,
-                    'inclusive' => true,
-                )),
-            'orderby' => 'meeting_date2', */
-            
-                    ));
-        }
+    $test_end_date = strtotime($test_end);
+    $test_end_date = date('Y-m-d', $test_end_date);
 
-    
+    // Only documents with specified category name and school year
+    $selectDoc = get_posts(array(
+    'posts_per_page' => -1, // get all posts
+    'post_type' => 'post',
+    'post_status' => 'publish',
+    'category_name' => $cat_name,
+        'meta_query' => array(
+            array(
+                'key'           => 'meeting_date',
+                'compare'       => 'BETWEEN',
+                'value'         => array( $test_start_date, $test_end_date),
+                'type'          => 'DATE',
+            )),
 
+    'order' => 'ASC',
+    'orderby' => 'meta_value',
+    'meta_key'       => 'meeting_date',         
+    'meta_type'      => 'DATETIME',
+    ));
+    }
 
     // If posts exist...
     if ( !$selectDoc ) 
@@ -104,7 +73,7 @@ elseif (isset($get_meeting_year))
         if (!isset($_GET['syr']) || $_GET['syr'] == 'all')
             {
             ?>
-            <table class="full"><tr><td>Select a document:</td><td align="right"><select id="myselect" name="location" onchange="window.location='?syr='+'all'+'&yrpos='+<?php echo $get_yrpos; ?>+'&id='+this.value+'&pos='+this.selectedIndex;"><option value="">-Select-</option>';
+            <table class="full"><tr><td>Select a document:</td><td align="right"><select id="myselect" name="location" onchange="window.location='?syr='+'all'+'&yrpos='+0+'&id='+this.value+'&pos='+this.selectedIndex;"><option value="">-Select-</option>';
             <?php
             }
         

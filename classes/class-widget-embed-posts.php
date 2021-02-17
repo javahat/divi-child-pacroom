@@ -19,10 +19,23 @@ class pdfembed_widget extends WP_Widget
         {
         $title = apply_filters( 'widget_title', $instance['title'] );
         
+        // outputs the content of the widget
+        if ( ! isset( $args['widget_id'] ) ) { $args['widget_id'] = $this->id; }
+
+        // widget ID with prefix for use in ACF API functions
+        $widget_id = 'widget_' . $args['widget_id'];
+
+        global $cat_name;
+        $cat_name = $instance['post-slider-cat'];
+        $cat_name = get_cat_name( $cat_name );
+
+        //$cat_name = get_field( 'widget_category', $widget_id );
+        $school_start = get_field( 'year_start', $widget_id );
+        
         // This is where you run the code and display the output
-        //echo 'Using template_part to get widget front end code.<br>';
-        // set the variable to use in template part
-        //set_query_var('year_start', $school_start);
+        //set the variable to use in template part
+        set_query_var('year_start', $school_start);
+        
         require_once( get_stylesheet_directory(). '/includes/widget-select-school-year.php' );
         require_once( get_stylesheet_directory(). '/includes/widget-select-document.php' );
 
@@ -55,7 +68,7 @@ class pdfembed_widget extends WP_Widget
             $cur_doc = get_field('document_pdf', $pid); 
             }
 
-        echo $cur_title;
+        echo '<strong>Document Title:</strong> ' . $cur_title;
         // Display embedded pdf document on page
         echo '<embed src="' . $cur_doc . '" type="application/pdf" width="100%" height="auto"></embed>';
         
@@ -75,8 +88,21 @@ class pdfembed_widget extends WP_Widget
         if ( isset( $instance[ 'title' ] ) ) { $title = $instance[ 'title' ]; }
         else { $title = __( 'New title', 'text_domain' ); }
         
+        $cat_name = isset( $instance['post-slider-cat'] ) ? $instance['post-slider-cat'] : '';
+        
         // Widget admin form
         echo '<p><label for="' . $this->get_field_id( 'title' ) . '">' . _e( 'Title:' ) . '</label><input class="widefat" id="' . $this->get_field_id( 'title' ) . '" name="' . $this->get_field_name( 'title' ) . '"type="text" value="' . esc_attr( $title ) . '"></p>';
+        
+        echo '<p><label for="' . $this->get_field_id( 'post-slider-cat' ) . '">' . _e( 'Category:' ) . '</label></p>';
+    
+        wp_dropdown_categories( array(
+         'show_option_all' => esc_html__( 'Select Category', 'text_domain' ),
+         'show_count' => true,
+         'selected' => absint( $cat_name ),
+         'name' => esc_attr( $this->get_field_name( 'post-slider-cat' ) ),
+         'id' => esc_attr( $this->get_field_id('post-slider-category' ) ),
+         'class' => 'widefat'
+         ) );
         
         } // end of public function form
 
@@ -85,6 +111,7 @@ class pdfembed_widget extends WP_Widget
         {
         $instance = array();
         $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+        $instance[ 'post-slider-cat' ] = ( ! empty( $new_instance['post-slider-cat'] ) ) ? absint( $new_instance['post-slider-cat'] ) : '';
         return $instance;
         }
     } // end of class widget

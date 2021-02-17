@@ -10,21 +10,18 @@
 //$school_start = get_query_var('year_start');
 //$school_start = get_query_var('year_start');
 
-
-if (!isset($school_start)) 
+// Check if School Start Month has been selected in teh widget
+if (!isset($school_start) || $school_start == '') 
     { 
-    $school_start = '09';
-    echo '<span class="important"><i>School Start is not carrying over from widget.</i></span>';
+    $school_start = '00';
+    echo '<span class="important"><i>You must select the first month of your year in your widget.</i></span>';
     }
 
-if (!isset($cat_name)) 
+if (!isset($cat_name) || $cat_name == '') 
     { 
     $cat_name = 'Meeting Document';
-    echo '<br><span class="important"><i>Category is not carrying over from widget.</i></span>';
+    echo '<br><span class="important"><i>You must select a category in your widget.</i></span>';
     }
-
-echo '<br>School Start:' . $school_start;
-echo '<br>Category: ' . $cat_name;
    
 // Get school years from existing document posts  
 $queryYear = get_posts(array(
@@ -41,7 +38,7 @@ $queryYear = get_posts(array(
 // If posts exist...
 if ( ! $queryYear ) 
     {
-    echo '<h2>Let\'s get started</h2><p class="important">There are no meeting documents to select.<br><br><em>Have the website admin upload a meeting document as a post and assign it to the category "' . $cat_name . '"</em></p>'; 
+    echo '<h2>Let\'s get started</h2><p class="important">There are no ' . $cat_name . 's to select.<br><br><em>Have the website admin upload a document as a post and assign it to the "' . $cat_name . '" category.</em></p>'; 
     }
 
 else
@@ -51,7 +48,7 @@ else
     <table class="full"><tr><td>Select a school year:</td><td align="right"><select id="selectyr" name="schoolyr" onchange="window.location='?syr='+this.value+'&yrpos='+this.selectedIndex;"><option value="all">All Years</option>';
     <?php
     // Create an array to filter posts
-    //$get_years = array();
+    $get_years = array();
     // for each entry retreived... 
     foreach($queryYear as $post)
         {
@@ -60,22 +57,19 @@ else
 
         // Determine which school year the document should be listed under
         $cur_id = $post->ID; // Get post id
-        //$meeting = get_field('meeting_date', $cur_id); // Get meeting date
         $meeting_date = strtotime(get_field('meeting_date', $cur_id)); // Convert meeting date
         $meeting_year = date('Y', $meeting_date); // Get meeting year
         $meeting_month = date('m', $meeting_date); // Get meeting month
 
-        if ($meeting_month < $school_start) { $meeting_year = $meeting_year -1; }
+        if ($meeting_month < $school_start) { $meeting_year = $meeting_year -1; } // Offset the year if needed
         $meeting_year2 = $meeting_year+1;           // Set end of school year variable
         
-        //if( in_array($meeting_year, $get_years) ) { continue; } //If in array, skip iteration
+        if( in_array($meeting_year, $get_years) ) { continue; } //If in array, skip iteration
 
         // Display the school year in the dropdown menu
         echo '<option value="' . $meeting_year . '">' . $meeting_year . ' / ' . $meeting_year2 . '</option>';
-    //$get_years[] = $meeting_year;
+    $get_years[] = $meeting_year;
         } // end foreach
-    
-    // Submit button
     echo '</select></td></tr></table>';
     
     if(isset($_GET['syr']))
