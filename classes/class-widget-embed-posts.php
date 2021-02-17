@@ -36,8 +36,7 @@ class pdfembed_widget extends WP_Widget
         //set the variable to use in template part
         set_query_var('year_start', $school_start);
         
-        require_once( get_stylesheet_directory(). '/includes/widget-select-school-year.php' );
-        require_once( get_stylesheet_directory(). '/includes/widget-select-document.php' );
+        require_once( get_stylesheet_directory(). '/includes/widget-select-document-by-school-year.php' );
 
         if (!isset($cur_doc)) 
             {
@@ -68,18 +67,9 @@ class pdfembed_widget extends WP_Widget
             $cur_doc = get_field('document_pdf', $pid); 
             }
 
-        echo '<strong>Document Title:</strong> ' . $cur_title;
+        echo '<br><strong>Document Title:</strong> ' . $cur_title;
         // Display embedded pdf document on page
         echo '<embed src="' . $cur_doc . '" type="application/pdf" width="100%" height="auto"></embed>';
-        
-        
-        
-        
-        //get_template_part( 'template-parts/widget-embed-pdf', get_post_format() );
-
-        //echo 'Using include to get widget front end code.<br>';
-        // include php file
-        //include('/home/pacroom2demo/public_html/wp-content/themes/divi-child-pspac/inc/widget-embed-pdf.php');
         } // end of public function widget
           
     // Output the options form in the admin area 

@@ -63,6 +63,9 @@ width: 100px;
 .et_pb_column_1_2 > .et_pb_row_inner.et_pb_gutters1 > .et_pb_column_1_6, .et_pb_gutters1 .et_pb_column_1_2 > .et_pb_row_inner > .et_pb_column_1_6
 	{ margin-left: 1%;}
 
+/* Remove right border on widgets */
+.et_pb_widget_area_left {border-right: none;}
+
 /* Table styles with alternating colours */
 table {
 	margin: 25px auto;
