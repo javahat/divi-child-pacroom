@@ -15,7 +15,7 @@ $permalink = get_permalink();
 
 if (!isset($school_start)) 
     { 
-    $school_start = '06';
+    $school_start = '09';
     echo '<span class="important"><i>School Start is not carrying over from widget.</i></span>';
     }
 
@@ -32,12 +32,13 @@ if (!isset($get_meeting_year) || $get_meeting_year == 'all')
     {
     // Get all documents with specified category name  
     $selectDoc = get_posts(array(
+    'posts_per_page' => -1,
     'post_type' => 'post',
     'post_status' => 'publish',
-    'category_name' => $cat_name,
-    'orderby' => 'meeting_date',
-    'order' => 'ASC',
-    'posts_per_page' => -1 // get all posts
+    'orderby' => 'meta_value',
+    'meta_key'       => 'meeting_date',         
+    'meta_type'      => 'DATE',
+    'order' => 'ASC', // get all posts
     ));
     }
 
@@ -47,15 +48,15 @@ elseif (isset($get_meeting_year))
         //$meeting_get = $_GET["syr"]; // Get the meeting date selected
         $meeting_get_year = date($_GET["syr"]); // Get the meeting year
         $meeting_year = date('Y', $meeting_get_year); // Filter the school year
-        $test_start = $meeting_get_year . '-09-01 00:00:00'; // Set the beginning of school year date
+        $test_start = $meeting_get_year . '-09-01'; // Set the beginning of school year date
         $test_end = $meeting_get_year+1; // Get the ending year
-        $test_end = $test_end . '-08-31 00:00:00'; // Set the end of the school year date
+        $test_end = $test_end . '-08-31'; // Set the end of the school year date
         
         $test_start_date = strtotime($test_start);
-        $test_start_date = date('Y-m-d H:i:s', $test_start_date);
+        $test_start_date = date('Y-m-d', $test_start_date);
         
         $test_end_date = strtotime($test_end);
-        $test_end_date = date('Y-m-d H:i:s', $test_end_date);
+        $test_end_date = date('Y-m-d', $test_end_date);
 
         // Only documents with specified category name and school year
         $selectDoc = get_posts(array(
@@ -68,7 +69,7 @@ elseif (isset($get_meeting_year))
                         'key'           => 'meeting_date',
                         'compare'       => 'BETWEEN',
                         'value'         => array( $test_start_date, $test_end_date),
-                        'type'          => 'DATETIME',
+                        'type'          => 'DATE',
                     )),
             
             'order' => 'ASC',
@@ -97,7 +98,7 @@ elseif (isset($get_meeting_year))
         echo '<br> no posts found between ' . $test_start_date . ' and ' .  $test_end_date;
         }
     
-    if ( $selectDoc ) 
+    else
         {
         // Begin form to select a school year
         if (!isset($_GET['syr']) || $_GET['syr'] == 'all')
@@ -124,7 +125,7 @@ elseif (isset($get_meeting_year))
             // Determine which school year the document should be listed under
             
             $meeting = get_field('meeting_date');      // Get the meeting date
-            $meeting2 = get_field('meeting_date2');      // Get the meeting date
+            //$meeting2 = get_field('meeting_date2');      // Get the meeting date
             //$meeting_date = strtotime(get_field('meeting_date2'));
             //$meeting_year = date('Y', $meeting); // Get meeting year
             //$meeting_month = date('m', $meeting_date); // Get meeting month
@@ -133,7 +134,7 @@ elseif (isset($get_meeting_year))
             $docu_type = get_field('document_type');    // Document type
             $cur_doc = get_field('document_pdf');
             $cur_id = $post->ID;
-            $cur_title = get_the_title();
+            $cur_title = get_the_title($cur_id);
 
             // Display the school year in the dropdown menu
             //echo '<option value="' . $cur_id . '">' . $meeting_month . ' ' . $meeting_year . ' ' . $meeting_type . ' ' . $docu_type . '</option>';

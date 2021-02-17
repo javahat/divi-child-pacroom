@@ -25,22 +25,23 @@ body,
  padding-top: 10px;
  }
 
-p.note /*note above Upcoming Events title on home page divi template*/
+p.note /*note above Upcoming Events title*/
  {
  text-align: center;
  padding: 0;
  margin: 0 0 5px;
-  font-size: 6pt;
+ font-size: 6pt;
 }
 
-.full { width: 100%; }
+.full { width: 100%; padding: 5px; margin: 0;
+}
 
 .important { color: red;}
 
-#selectyr
+#selectyr, #myselect
 {
 text-align: right;
-min-width: 195px;
+min-width: 150px;
 }
 
 td.dropdowndd select
@@ -48,32 +49,62 @@ td.dropdowndd select
 width: 100px;
 }
 
-.embed-container {
-
- position: relative;
-
- padding-bottom: 56.25%; /* set the aspect ratio here as (height / width) * 100% */
-
- height: 0;
-
- overflow: hidden;
-
- max-width: 100%;
-
+/* Width of side columns of special layout on home page */
+.et_pb_gutters1 .et_pb_column_1_4, .et_pb_gutters1.et_pb_row .et_pb_column_1_4
+{
+	width: 20%;
 }
 
-.embed-container embed {
+/* Width of middle column of special layout on home page */
+.et_pb_gutters1 .et_pb_column_1_2, .et_pb_gutters1.et_pb_row .et_pb_column_1_2 {
+	width: 60%;}
+	
+/* Gutter between columns in rows of menu sections on home page */
+.et_pb_column_1_2 > .et_pb_row_inner.et_pb_gutters1 > .et_pb_column_1_6, .et_pb_gutters1 .et_pb_column_1_2 > .et_pb_row_inner > .et_pb_column_1_6
+	{ margin-left: 1%;}
 
- position: absolute;
+/* Table styles with alternating colours */
+table {
+	margin: 25px auto;
+	width: 80%;
+	border: 1px solid #ccc;
+}
 
- top: 0;
+table.document-list { width: 100%;}
 
- left: 0;
+table th {
+	background-color: #000000;
+	color: #ffffff;
+	padding: 0 5px;
+}
 
- width: 100%;
+table td {
+	padding: 5px;
+}
 
- height: 100%;
+tr:nth-child(odd) {
+	background-color: #eeeeee;
+}
+/* Reduce width of columns in rows of menu section so it fits on the screen. */
+@media screen and (max-width:980px){
+.et_pb_gutters1 .et_pb_row_1-6_1-6_1-6 > .et_pb_column.et_pb_column_1_6, .et_pb_gutters1.et_pb_row_1-2_1-6_1-6_1-6 > .et_pb_column.et_pb_column_1_6 {
+	width: 32.333%;
+}
+}
 
+
+@media (min-width: 760px) {
+#wstilemenu .et_pb_menu__menu {
+display: block !important;
+}
+
+#wstilemenu .et_mobile_nav_menu {
+display:none;
+}
+}
+
+embed {
+object-fit: contain;
 }
 
 /* Width of side columns of special layout on home page divi template */

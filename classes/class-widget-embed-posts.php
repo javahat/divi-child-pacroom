@@ -23,11 +23,8 @@ class pdfembed_widget extends WP_Widget
         //echo 'Using template_part to get widget front end code.<br>';
         // set the variable to use in template part
         //set_query_var('year_start', $school_start);
-
-        get_template_part( 'template_parts/widget-select-school-year', get_post_format() );
-        get_template_part( 'template_parts/widget-select-document', get_post_format() );
-        //include('template_parts/widget-select-school-year.php');
-        //include('template_parts/widget-select-document.php');
+        require_once( get_stylesheet_directory(). '/includes/widget-select-school-year.php' );
+        require_once( get_stylesheet_directory(). '/includes/widget-select-document.php' );
 
         if (!isset($cur_doc)) 
             {
